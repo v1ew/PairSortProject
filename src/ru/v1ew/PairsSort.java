@@ -7,33 +7,30 @@ import java.util.ArrayList;
  */
 public class PairsSort {
     public static ArrayList<Pair> sort(ArrayList<Pair> pairs) {
+        if (pairs == null) return null; // В данном случае можно было бы вернуть пустой список или сген. исключение
+        if (pairs.size() < 2) return pairs;
+
         ArrayList<Pair> newPairs = new ArrayList<>();
         newPairs.add(pairs.get(0));
         pairs.remove(0);
-        boolean swap;
+        boolean pairMoved;
         do {
-            swap = false;
+            pairMoved = false;
             for (int i = 0; i < pairs.size(); ++i) {
                 if (newPairs.get(0).getFirst().equals(pairs.get(i).getSecond())) {
                     newPairs.add(0, pairs.get(i));
-                    pairs.remove(i);
-                    swap = true;
-                    break;
-                }
-            }
-        } while (pairs.size() > 0 && swap);
-
-        do {
-            swap = false;
-            for (int i = 0; i < pairs.size(); ++i) {
-                if (newPairs.get(newPairs.size() - 1).getSecond().equals(pairs.get(i).getFirst())) {
+                    pairMoved = true;
+                } else if (newPairs.get(newPairs.size() - 1).getSecond().equals(pairs.get(i).getFirst())) {
                     newPairs.add(pairs.get(i));
+                    pairMoved = true;
+                }
+
+                if (pairMoved) {
                     pairs.remove(i);
-                    swap = true;
                     break;
                 }
             }
-        } while (pairs.size() > 0 && swap);
+        } while (pairs.size() > 0 && pairMoved);
 
         return newPairs;
     }

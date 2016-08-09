@@ -21,7 +21,38 @@ public class PairTest {
     }
 
     @Test
-    public void sortPairCheck() {
+    public void sortNullListCheck() {
+        ArrayList<Pair> pairs = PairsSort.sort(null);
+        assertNull(pairs);
+    }
+
+    @Test
+    public void sortEmptyListCheck() {
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs = PairsSort.sort(pairs);
+        assertEquals(0, pairs.size());
+    }
+
+    @Test
+    public void sortOnePairListCheck() {
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("one", "two"));
+        pairs = PairsSort.sort(pairs);
+        assertEquals(1, pairs.size());
+        assertEquals("one", pairs.get(0).getFirst());
+    }
+
+    @Test
+    public void sortTwoPairsCheck() {
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("two", "three"));
+        pairs.add(new Pair("one", "two"));
+        pairs = PairsSort.sort(pairs);
+        assertEquals("one", pairs.get(0).getFirst());
+    }
+
+    @Test
+    public void sortPairsListCheck() {
         ArrayList<Pair> pairs = new ArrayList<>();
         pairs.add(new Pair("one", "two"));
         pairs.add(new Pair("four", "five"));
